@@ -50,26 +50,34 @@
     {
         showLister = true;
         isLoaded = true;
+        //taskDataService.TasksUpdated += TaskServiceOnTasksUpdated;
         return base.OnInitializedAsync();
     }
+    //private void TaskServiceOnTasksUpdated(object sender, EventArgs e)
+    //{
+    //    LoadCurrentTasks();
+    //}
 
 
-    
+
 
     private void OnAddItem()
     {
-        var task = new TaskModel()
+        var task = new TaskVm()
         {
             Id = Guid.NewGuid(),
-            IsDone = false,
-            Text = newTask
+            IsComplete = false,
+            Subject = newTask,
+            
         };
 
         newTask = string.Empty;
 
-        if (memberService.SelectedMember != null)
+        if (memberService.SelectedMember != null )
         {
-            task.Member = memberService.SelectedMember.Id;
+            System.Diagnostics.Debug.WriteLine(memberService.SelectedMember.Id);
+            task.AssignedMemberId = new Guid( memberService.SelectedMember.Id.ToString());
+            System.Diagnostics.Debug.WriteLine(task.AssignedMemberId);
         }
         taskDataService.AddTask(task);
         StateHasChanged();

@@ -106,6 +106,14 @@ namespace Core.Abstractions.Repositories
         /// <param name="cancellationToken"></param>
         /// <returns><see cref="TEntity"/></returns>
         Task<TEntity> SelectFirstOrDefaultAsync(CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// Used to return related data
+        /// </summary>
+        /// <param name="navigationPath"></param>
+        /// <param name="cancellationToken"></param>
+        /// <returns></returns>
+        TRepository Include(string navigationPath, CancellationToken cancellationToken = default);
     }
 
 }

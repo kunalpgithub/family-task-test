@@ -127,6 +127,11 @@ namespace DataLayer
         {
             return await Query.FirstOrDefaultAsync(cancellationToken);
         }
+
+        public virtual TRepository Include(string navigationPath,CancellationToken cancellationToken = default) {
+            Query =  Query.Include(navigationPath);
+            return this as TRepository;
+        }
     }
 
 
